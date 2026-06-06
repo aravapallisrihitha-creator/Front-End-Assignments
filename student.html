@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Records</title>
+</head>
+<body>
+
+<h2>Student Records</h2>
+
+<ul id="studentList"></ul>
+
+<button onclick="updateWithDOM()">Update using Direct DOM</button>
+<button onclick="updateWithVDOM()">Update using Virtual DOM</button>
+
+<script>
+
+let students = [
+  "Aarav",
+  "Bhavya",
+  "Charan",
+  "Divya",
+  "Esha",
+  "Farhan",
+  "Gopi",
+  "Harsha",
+  "Ishita",
+  "Jyothi"
+];
+
+// Initial display
+function renderList() {
+  const list = document.getElementById("studentList");
+  list.innerHTML = "";
+
+  students.forEach(student => {
+    const li = document.createElement("li");
+    li.textContent = student;
+    list.appendChild(li);
+  });
+}
+
+renderList();
+
+
+// Direct DOM Approach
+function updateWithDOM() {
+
+  // Change student names
+  students[2] = "Kiran";
+  students[5] = "Lavanya";
+
+  // Re-render entire list
+  renderList();
+}
+
+
+// Virtual DOM Approach
+function updateWithVDOM() {
+
+  // Change only required records
+  students[1] = "Meena";
+  students[7] = "Naveen";
+
+  const list = document.getElementById("studentList");
+
+  // Update only changed elements
+  list.children[1].textContent = students[1];
+  list.children[7].textContent = students[7];
+}
+
+</script>
+
+</body>
+</html>
